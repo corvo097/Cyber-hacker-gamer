@@ -1,53 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>CyberDesk</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>CYBERDESK | SINGULARITY</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <div class="crt"></div>
+    <div id="os-container">
+        <header id="top-bar">
+            <div class="stat">USER: <b>CORVO</b></div>
+            <div class="stat">CRED: $<b id="money">0</b></div>
+            <div class="stat">BOTS: <b id="bots">0</b> (<span id="income">0</span>/s)</div>
+            <div class="stat">DEFENSE: <b id="def-lv">1</b></div>
+            <div class="trace-box">
+                RISK: <span id="trace-txt">0</span>%
+                <div class="bar"><div id="trace-fill"></div></div>
+            </div>
+        </header>
 
-<div id="game">
+        <div id="main-content">
+            <nav id="sidebar">
+                <button onclick="tab('term')">_TERMINAL</button>
+                <button onclick="tab('net')">_REDE_MUNDIAL</button>
+                <button onclick="tab('bot')">_BOTNET</button>
+                <button onclick="tab('deep')">_DEEP_WEB</button>
+                <button onclick="tab('mail')">_MENSAGENS <span id="m-count">!</span></button>
+            </nav>
 
-<h1>CYBERDESK</h1>
+            <section id="viewport">
+                <div id="t-term" class="tab active">
+                    <div id="log"></div>
+                    <div class="input-line"><span>#</span><input type="text" id="cmd" autofocus></div>
+                </div>
 
-<div id="city">
-<h2>🌆 Cidade Digital</h2>
+                <div id="t-net" class="tab">
+                    <h3>ALVOS DETECTADOS</h3>
+                    <div id="map"></div>
+                </div>
 
-<button onclick="startMission('wifi')">Hackear WiFi</button>
-<button onclick="startMission('data')">Roubar Dados</button>
-<button onclick="startMission('bank')">Invadir Banco</button>
+                <div id="t-bot" class="tab">
+                    <h3>MINERAÇÃO DE DADOS</h3>
+                    <div class="card">
+                        <p>Sua Botnet está operando em <span id="bot-n">0</span> nós.</p>
+                        <button onclick="buy('bot')">Expandir Infecção ($500)</button>
+                    </div>
+                </div>
 
-</div>
+                <div id="t-deep" class="tab">
+                    <h3>BLACK MARKET SERVICES</h3>
+                    <button onclick="buy('vpn')">Comprar VPN ($300)</button>
+                    <button onclick="buy('def')">Upgrade Firewall ($1000)</button>
+                    <button onclick="buy('nuke')">Limpar Logs ($2000)</button>
+                </div>
 
-<div id="terminal">
-
-<h2>💻 Terminal</h2>
-
-<div id="terminalOutput"></div>
-
-<input
-id="commandInput"
-placeholder="Digite um comando..."
-onkeydown="handleCommand(event)"
->
-
-</div>
-
-<div id="stats">
-
-<h2>🧠 Hacker</h2>
-
-<p>Dinheiro: $<span id="money">0</span></p>
-<p>Nível: <span id="level">1</span></p>
-<p>Rastreamento: <span id="trace">0</span>%</p>
-
-</div>
-
-</div>
-
-<script src="script.js"></script>
-
+                <div id="t-mail" class="tab">
+                    <h3>CAIXA DE ENTRADA</h3>
+                    <div id="mails"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div id="attack-alert">
+        <h2>ALERTA DE CONTRA-HACK!</h2>
+        <p>A polícia está invadindo seu sistema!</p>
+        <p>DIGITE O CÓDIGO DE DEFESA: <br><b id="def-code">----</b></p>
+        <input type="text" id="def-input">
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
