@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>CyberDesk</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+<h1>CYBERDESK</h1>
+
+<div id="city">
+<h2>🌆 Cidade Digital</h2>
+
+<button onclick="startMission('wifi')">Hackear WiFi</button>
+<button onclick="startMission('data')">Roubar Dados</button>
+<button onclick="startMission('bank')">Invadir Banco</button>
+
+</div>
+
+<div id="terminal">
+
+<h2>💻 Terminal</h2>
+
+<div id="terminalOutput"></div>
+
+<input
+id="commandInput"
+placeholder="Digite um comando..."
+onkeydown="handleCommand(event)"
+>
+
+</div>
+
+<div id="stats">
+
+<h2>🧠 Hacker</h2>
+
+<p>Dinheiro: $<span id="money">0</span></p>
+<p>Nível: <span id="level">1</span></p>
+<p>Rastreamento: <span id="trace">0</span>%</p>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
