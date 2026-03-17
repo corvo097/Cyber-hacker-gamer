@@ -1,0 +1,41 @@
+body{
+background:black;
+color:#00ff9c;
+font-family:monospace;
+}
+
+#game{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:20px;
+padding:20px;
+}
+
+button{
+background:#001f1a;
+color:#00ff9c;
+border:1px solid #00ff9c;
+padding:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#00ff9c;
+color:black;
+}
+
+#terminalOutput{
+height:200px;
+overflow:auto;
+border:1px solid #00ff9c;
+padding:10px;
+margin-bottom:10px;
+}
+
+input{
+width:100%;
+background:black;
+color:#00ff9c;
+border:1px solid #00ff9c;
+padding:10px;
+}
