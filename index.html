@@ -1,122 +1,88 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CYBERDESK OS</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBERDESK OS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <canvas id="matrix"></canvas>
 <div class="grid"></div>
 
+<div id="tutorial-overlay">
+    <div class="tutorial-box">
+        <h1>SISTEMA REINICIALIZADO</h1>
+        <p>Bem-vindo de volta, <span class="highlight">CORVO</span>.</p>
+        <ul style="text-align:left; font-size:12px;">
+            <li>1. Acesse a 🌐 <b>REDE</b> para encontrar alvos.</li>
+            <li>2. Clique nos pontos verdes do mapa para hackear.</li>
+            <li>3. Use o 💻 <b>TERMINAL</b> para ver os logs.</li>
+        </ul>
+        <button onclick="fecharTutorial()" class="action">INICIAR OPERAÇÃO</button>
+    </div>
+</div>
+
 <div id="os-container">
+    <header id="top-bar">
+        <div class="hud"><span>USER</span><b>CORVO</b></div>
+        <div class="hud"><span>CRED</span><b id="money">0</b></div>
+        <div class="hud"><span>BOTS</span><b id="bots">0</b></div>
+        <div class="hud"><span>DEF</span><b id="def-lv">1</b></div>
+        <div class="risk-box">
+            RISK <span id="trace-txt">0</span>%
+            <div class="bar"><div id="trace-fill"></div></div>
+        </div>
+    </header>
 
-<header id="top-bar">
+    <div id="main">
+        <nav id="sidebar">
+            <button onclick="tab('term')">💻 TERMINAL</button>
+            <button onclick="tab('net')">🌐 REDE</button>
+            <button onclick="tab('bot')">🤖 BOTNET</button>
+            <button onclick="tab('deep')">🕶 DEEPWEB</button>
+            <button onclick="tab('mail')">📨 MSG [<span id="m-count">0</span>]</button>
+        </nav>
 
-<div class="hud">
-<span>USER</span>
-<b>CORVO</b>
-</div>
+        <section id="viewport">
+            <div id="t-term" class="tab active">
+                <div id="log"></div>
+                <div class="input-line"><span>#</span><input id="cmd" autocomplete="off"></div>
+            </div>
 
-<div class="hud">
-<span>CRED</span>
-<b id="money">0</b>
-</div>
+            <div id="t-net" class="tab">
+                <h3>MAPA DE REDE MUNDIAL</h3>
+                <canvas id="network"></canvas>
+            </div>
 
-<div class="hud">
-<span>BOTS</span>
-<b id="bots">0</b>
-</div>
+            <div id="t-bot" class="tab">
+                <div class="card">
+                    <h3>BOTNET</h3>
+                    <p>Nós ativos: <span id="bot-n">0</span></p>
+                    <button onclick="buy('bot')" class="action">Infectar +10 Nós ($500)</button>
+                </div>
+            </div>
 
-<div class="hud">
-<span>DEF</span>
-<b id="def-lv">1</b>
-</div>
+            <div id="t-deep" class="tab">
+                <div class="card">
+                    <h3>DEEP MARKET</h3>
+                    <button onclick="buy('vpn')" class="action">VPN $300</button>
+                    <button onclick="buy('def')" class="action">Firewall $1000</button>
+                    <button onclick="buy('nuke')" class="action">Limpar Logs $2000</button>
+                </div>
+            </div>
 
-<div class="risk-box">
-RISK <span id="trace-txt">0</span>%
-<div class="bar">
-<div id="trace-fill"></div>
-</div>
-</div>
-
-</header>
-
-<div id="main">
-
-<nav id="sidebar">
-
-<button onclick="tab('term')">💻 TERMINAL</button>
-<button onclick="tab('net')">🌐 REDE</button>
-<button onclick="tab('bot')">🤖 BOTNET</button>
-<button onclick="tab('deep')">🕶 DEEPWEB</button>
-<button onclick="tab('mail')">📨 MSG</button>
-
-</nav>
-
-<section id="viewport">
-
-<div id="t-term" class="tab active">
-
-<div id="log"></div>
-
-<div class="input-line">
-<span>#</span>
-<input id="cmd" autocomplete="off">
-</div>
-
-</div>
-
-<div id="t-net" class="tab">
-
-<h3>MAPA DE REDE</h3>
-
-<canvas id="network"></canvas>
-
-</div>
-
-<div id="t-bot" class="tab">
-
-<div class="card">
-<h3>BOTNET</h3>
-<p>Nós ativos <span id="bot-n">0</span></p>
-<button onclick="buy('bot')" class="action">Comprar Bots</button>
-</div>
-
-</div>
-
-<div id="t-deep" class="tab">
-
-<div class="card">
-<h3>DEEP MARKET</h3>
-
-<button onclick="buy('vpn')" class="action">VPN $300</button>
-<button onclick="buy('def')" class="action">Firewall $1000</button>
-<button onclick="buy('nuke')" class="action">Limpar Logs $2000</button>
-
-</div>
-
-</div>
-
-<div id="t-mail" class="tab">
-<div id="mails"></div>
-</div>
-
-</section>
-
-</div>
-
+            <div id="t-mail" class="tab">
+                <h3>CAIXA DE ENTRADA</h3>
+                <div id="mails"></div>
+            </div>
+        </section>
+    </div>
 </div>
 
 <div id="alert" class="glitch"></div>
 
-<audio id="typeSound" src="https://assets.mixkit.co/sfx/preview/mixkit-fast-typing-on-keyboard-2544.mp3"></audio>
-<audio id="hackSound" src="https://assets.mixkit.co/sfx/preview/mixkit-digital-typing-1290.mp3"></audio>
-
 <script src="script.js"></script>
-
 </body>
 </html>
